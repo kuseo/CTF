@@ -1,0 +1,5 @@
+
+	<script language="javascript">
+		alert("Congratulation!");
+	</script>
+	Authkey : G0Od d@y

@@ -1,0 +1,14 @@
+Determining profile based on KDBG search...
+
+          Suggested Profile(s) : Win7SP0x86, Win7SP1x86
+                     AS Layer1 : IA32PagedMemoryPae (Kernel AS)
+                     AS Layer2 : FileAddressSpace (C:\Users\tjrkd\Desktop\suninatas\level30\MemoryDump(SuNiNaTaS))
+                      PAE type : PAE
+                           DTB : 0x185000L
+                          KDBG : 0x82f6cc28L
+          Number of Processors : 1
+     Image Type (Service Pack) : 1
+                KPCR for CPU 0 : 0x82f6dc00L
+             KUSER_SHARED_DATA : 0xffdf0000L
+           Image date and time : 2016-05-24 09:47:40 UTC+0000
+     Image local date and time : 2016-05-24 18:47:40 +0900

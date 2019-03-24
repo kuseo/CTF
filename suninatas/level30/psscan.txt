@@ -1,0 +1,50 @@
+Offset(P)  Name                PID   PPID PDB        Time created                   Time exited                   
+---------- ---------------- ------ ------ ---------- ------------------------------ ------------------------------
+0x3da3b228 svchost.exe        3320    460 0x3eb23500 2016-05-24 09:24:42 UTC+0000                                 
+0x3daa6a88 conhost.exe        2920    368 0x3eb235a0 2016-05-24 09:41:57 UTC+0000                                 
+0x3dafb650 iexplore.exe       2432   3948 0x3eb23200 2016-05-24 09:35:30 UTC+0000                                 
+0x3dafc030 wlrmdr.exe         2836    416 0x3eb231a0 2016-05-24 09:23:07 UTC+0000   2016-05-24 09:23:17 UTC+0000  
+0x3dafcd40 svchost.exe        3352    460 0x3eb234a0 2016-05-24 09:24:42 UTC+0000                                 
+0x3dc11d40 conhost.exe        3556    368 0x3eb235c0 2016-05-24 09:24:49 UTC+0000   2016-05-24 09:27:52 UTC+0000  
+0x3dc6ed40 msdtc.exe          2464    460 0x3eb232c0 2016-05-24 09:23:02 UTC+0000                                 
+0x3dcf7d00 WmiPrvSE.exe       2580    588 0x3eb23520 2016-05-24 09:23:03 UTC+0000                                 
+0x3dd01ab8 VGAuthService.     2020    460 0x3eb23420 2016-05-24 09:22:40 UTC+0000                                 
+0x3dd11bd0 vmtoolsd.exe       2044    460 0x3eb23440 2016-05-24 09:22:40 UTC+0000                                 
+0x3dd5b498 notepad.exe        3728   1256 0x3eb23280 2016-05-24 09:45:46 UTC+0000                                 
+0x3dd6d638 iexplore.exe       1840   3948 0x3eb23560 2016-05-24 09:34:45 UTC+0000                                 
+0x3dd8d030 WmiPrvSE.exe       1548    588 0x3eb23480 2016-05-24 09:22:43 UTC+0000                                 
+0x3dd9b9a0 iexplore.exe       3948   1408 0x3eb233c0 2016-05-24 09:34:28 UTC+0000                                 
+0x3ddb55c8 dllhost.exe        2084    460 0x3eb234c0 2016-05-24 09:22:45 UTC+0000                                 
+0x3de055f0 svchost.exe        1072    460 0x3eb23240 2016-05-24 09:22:24 UTC+0000                                 
+0x3dea8bc0 spoolsv.exe        1348    460 0x3eb232a0 2016-05-24 09:22:27 UTC+0000                                 
+0x3dec4bb8 dwm.exe            1392    852 0x3eb232e0 2016-05-24 09:22:27 UTC+0000                                 
+0x3ded04c0 explorer.exe       1408   1368 0x3eb23320 2016-05-24 09:22:27 UTC+0000                                 
+0x3ded1c88 svchost.exe        1464    460 0x3eb23360 2016-05-24 09:22:28 UTC+0000                                 
+0x3ded34b0 taskhost.exe       1420    460 0x3eb23340 2016-05-24 09:22:27 UTC+0000                                 
+0x3df6c030 v1tvr0.exe         1640   1408 0x3eb233a0 2016-05-24 09:22:30 UTC+0000                                 
+0x3df7e680 vmtoolsd.exe       1632   1408 0x3eb23380 2016-05-24 09:22:30 UTC+0000                                 
+0x3e074698 csrss.exe           368    352 0x3eb23040 2016-05-24 09:22:19 UTC+0000                                 
+0x3e084ba0 winlogon.exe        416    352 0x3eb230c0 2016-05-24 09:22:19 UTC+0000                                 
+0x3e0bb030 svchost.exe        1184    460 0x3eb23260 2016-05-24 09:22:25 UTC+0000                                 
+0x3e0ca498 services.exe        460    360 0x3eb23080 2016-05-24 09:22:20 UTC+0000                                 
+0x3e0cb720 svchost.exe         588    460 0x3eb23120 2016-05-24 09:22:21 UTC+0000                                 
+0x3e0cba58 lsass.exe           476    360 0x3eb230e0 2016-05-24 09:22:20 UTC+0000                                 
+0x3e0de030 lsm.exe             484    360 0x3eb23100 2016-05-24 09:22:20 UTC+0000                                 
+0x3e155570 svchost.exe         732    460 0x3eb23180 2016-05-24 09:22:22 UTC+0000                                 
+0x3e168030 vmacthlp.exe        652    460 0x3eb23140 2016-05-24 09:22:22 UTC+0000                                 
+0x3e16e030 svchost.exe         684    460 0x3eb23160 2016-05-24 09:22:22 UTC+0000                                 
+0x3e1b5c58 SearchIndexer.      832    460 0x3eb23400 2016-05-24 09:22:43 UTC+0000                                 
+0x3e1dcb18 svchost.exe         852    460 0x3eb231c0 2016-05-24 09:22:23 UTC+0000                                 
+0x3e1e0818 svchost.exe         892    460 0x3eb231e0 2016-05-24 09:22:23 UTC+0000                                 
+0x3e1f1398 svchost.exe         996    460 0x3eb23220 2016-05-24 09:22:24 UTC+0000                                 
+0x3e27b030 csrss.exe           320    300 0x3eb23060 2016-05-24 09:22:19 UTC+0000                                 
+0x3e5c5218 wininit.exe         360    300 0x3eb230a0 2016-05-24 09:22:19 UTC+0000                                 
+0x3eadd148 smss.exe            236      4 0x3eb23020 2016-05-24 09:22:16 UTC+0000                                 
+0x3ef28a20 System                4      0 0x00185000 2016-05-24 09:22:16 UTC+0000                                 
+0x3f428b18 DumpIt.exe         1260   1408 0x3eb235c0 2016-05-24 09:47:38 UTC+0000                                 
+0x3f772bc0 cmd.exe            1256   1408 0x3eb233e0 2016-05-24 09:41:57 UTC+0000                                 
+0x3fc9dd40 SearchFilterHo     2696    832 0x3eb23600 2016-05-24 09:46:48 UTC+0000                                 
+0x3fca4a58 SearchProtocol     4048    832 0x3eb23300 2016-05-24 09:46:47 UTC+0000                                 
+0x3fcbb468 dllhost.exe        2536    588 0x3eb23620 2016-05-24 09:47:41 UTC+0000   2016-05-24 09:47:46 UTC+0000  
+0x3fcfa610 conhost.exe        1980    368 0x3eb235e0 2016-05-24 09:47:38 UTC+0000                                 
+0x3ff8ba20 System                4      0 0x00185000 2016-05-24 09:22:16 UTC+0000                                 
