@@ -104,7 +104,7 @@ with requests.Session() as s:
 ***Authkey : l3ruteforce P@ssword***
 
 
-## level 9 - Reverse Engineering – static analysis
+## level 9 - Reverse Engineering
 Olydbg를 이용해 해당 프로그램을 분석한다. 프로그램 내의 string을 조사해보면 “Congratulation”이라는 텍스트를 확인할 수 있다. 해당 위치로 이동해보면 MessageBox에 의해 해당 텍스트가 출력되는 것임을 알 수 있다. MessageBox 함수가 호출되기 전에 어떤 함수를 호출하고(CALL 명령어) 조건에 따라 분기(JNZ명령어)가 실행된다. 우리의 목표는 “Congratulation” 메시지박스를 띄우는 것 이므로 분기조건을 확인하기 위해 CALL 00404608 부분에 BP를 걸어 디버깅을 해보면 이 루틴은 EAX(사용자 입력값)와 EDX(“913465”)의 값을 비교하여 그 값들이 같으면 MessageBox를 띄우는 루틴으로 이동하는 기능을 하는 것임을 알 수 있다.
 
 ![fig1](https://github.com/tjrkddnr/CTF/blob/master/suninatas/level9/fig1.jpg?raw=true)
@@ -114,7 +114,7 @@ Olydbg를 이용해 해당 프로그램을 분석한다. 프로그램 내의 str
 ***Authkey : 913465***
 
 
-## level 10 - Reverse Engineering – static analysis
+## level 10 - Reverse Engineering
 Exeinfo PE를 통해 해당 파일 정보를 확인해 보면 .NET으로 작성된 프로그램임을 알 수 있다. Dopeek을 이용해 decompile하면 소스코드 전체를 확인할 수 있다.
 
 ![fig1](https://github.com/tjrkddnr/CTF/blob/master/suninatas/level10/fig1.jpg?raw=true)
@@ -124,7 +124,7 @@ Exeinfo PE를 통해 해당 파일 정보를 확인해 보면 .NET으로 작성�
 ***Authkey : Did U use the Peid?***
 
 
-## level 11 - Reverse Engineering – static analysis
+## level 11 - Reverse Engineering
 9번문제와 마찬가지로 문제 내의 string을 조사하고 분기조건 직전에 호출되는 함수 부분에 BP를 걸어 분석한다. EAX(사용자 입력값)와 EDX(“2VB6H1XS0F“)의 값이 같으면 MessageBox를 띄우는 루틴임을 알 수 있다. 2VB6H1XS0F을 입력 값으로 넘겨주면 authkey를 얻을 수 있다.
 
 ![fig1](https://github.com/tjrkddnr/CTF/blob/master/suninatas/level11/fig1.jpg?raw=true)
@@ -295,7 +295,7 @@ Ida pro의 decompile 기능을 이용해 auth 코드를 보면 memcpy 함수에 
 
 
 ## level 21 - Steganography
-문제의 jpg 파일의 크기가 일반적인 jpg파일 크기보다 훨씬 크다. 이 사실로부터 jpg 파일에 또다른 정보가 포함되어 있음을 유추할 수 있다. jpg파일의 SOI는 FF D8이고, EOI는 FF D9이다. WinHex를 이용해 해당 바이트를 검색하면 SOI/EOI가 여러 번 반복됨을 확인할 수 있다. 즉, 이미지 파일 안에 또다른 이미지파일이 들어있는 것이다. SOI와 EOI를 기준으로 파일을 분할하면 숨겨진 이미지들을 추출해낼 수 있다.`
+문제의 jpg 파일의 크기가 일반적인 jpg파일 크기보다 훨씬 크다. 이 사실로부터 jpg 파일에 또다른 정보가 포함되어 있음을 유추할 수 있다. jpg파일의 SOI는 FF D8이고, EOI는 FF D9이다. WinHex를 이용해 해당 바이트를 검색하면 SOI/EOI가 여러 번 반복됨을 확인할 수 있다. 즉, 이미지 파일 안에 또다른 이미지파일이 들어있는 것이다. SOI와 EOI를 기준으로 파일을 분할하면 숨겨진 이미지들을 추출해낼 수 있다.
  
 원본 - ![fig1](https://github.com/tjrkddnr/CTF/blob/master/suninatas/level21/images/1.jpg?raw=true)
 
@@ -361,6 +361,7 @@ with requests.Session() as s:
 
 ## level 23 - Blind SQL injection
 22번 문제와 유사하지만 “admin” 문자열이 필터링되어 id 필드에 입력할 수 없다. MS-SQL의 concatenation 문법을 이용해 adm’+’in’ 과 같이 입력하여 필터링을 우회한다. 또한, substring 함수가 필터링되므로 비슷한 기능을 하는 left 함수를 이용한다. adm'+'in'and(left(pw,1)='V')--와 같은 쿼리문을 시도한다. 하지만 id / pw필드에 30자리 글자수 제한까지 걸려있어 위 방법으로는 ‘V3’까지의 pw 값만 뽑아낼 수 있다. adm’+’in’and(len(pw)=1)--와 같은 쿼리문을 시도하여 pw의 길이를 알아낸다. pw의 길이는 12이다. pw의 처음 2자리가 ‘V3’임을 알고 있으므로, admin을 id 필드에 넣지 않고도 admin의 pw를 유추할 수 있다. ‘or left(pw,2)=’V3’--와 같은 쿼리문을 시도한다. 마찬가지로 right함수를 이용하여 pw의 값을 뽑아내고 left에 의해 뽑아낸 값과 right에 의해 뽑아낸 값을 겹치는 부분을 제외하고 합치면 온전한 pw 값을 알아낼 수 있다.
+
 ```python
 import requests
 
