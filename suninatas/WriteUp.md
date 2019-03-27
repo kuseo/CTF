@@ -283,11 +283,22 @@ with open('cipher.txt', 'r') as f:
 ***Authkey : PLAIDCTFISVERYHARD***
 
 
-## level 20 - Buffer overflow attack
-IDA를 이용해 문제의 파일을 디스어셈블한다. 해당 프로그램은 input을 받아 base64 decoding을 수행하고 그 값이 0xc(12)를 넘지 않으면 auth 함수를 호출한다. auth 함수에서는 input에 대한 md5 해쉬값을 계산하여 그 값이 특정 해쉬값(f87cd601aa7fedca99018a8be88eda34 )과 비교하여 같으면 correct 함수를 호출하는 구조이다. 이때 비교 연산에 사용되는 해쉬값은 rainbow table에서 확인할 수 없는 값이므로 정상적인 input 값을 구하는 것은 불가능하다. 우리의 목표는 단순히 correct 함수를 호출하는 것이므로 auth 함수에서 호출하는 memcpy 함수의 취약점을 이용한 BOF attack을 시도한다. 
-Ida pro의 decompile 기능을 이용해 auth 코드를 보면 memcpy 함수에 의해 input의 값이 int형 변수 v3에 복사되는데, input은 12bytes인 반면 v3는 int형 4bytes 이므로 buffer overflow가 발생한다. 지역 변수 v3와 ebp의 거리는 8이므로 input의 마지막 4bytes로 ebp가 변조되는 것이다. 따라서 input의 마지막 4byte(&input + 8bytpes)를 input의 시작 주소로 두고, &input + 4bytes의 값을 correct 함수의 시작 지점으로 두면 auth 함수가 끝난 후 ebp는 input의 시작주소, ret은 correct 함수의 시작 주소로 변조된다. (ebp의 위치는 고정된 값이므로 4bytes 크기인 ebp를 8bytes 크기로 변조시켜 ebp + 4bytes에 위치한 ret 영역까지 변조시킨 것이다.)
+## level 20 - Buffer overflow attack -fake ebp
+IDA를 이용해 문제의 파일을 디스어셈블한다. 해당 프로그램은 값을 입력 받아  base64 decoding을 수행하고 그 값의 길이가 0xc(12)를 넘지 않으면 입력받은 값을 input 변수에 넣고 auth 함수를 호출한다. auth 함수에서는 input에 대한 md5 해쉬값을 계산하여 그 값이 특정 해쉬값(f87cd601aa7fedca99018a8be88eda34 )과 비교하여 같으면 correct 함수를 호출하고, correct 함수에서는 input 값이 \xdeadbeef와 같으면 "Congratulation..."을 출력하는 구조이다. 이때 비교 연산에 사용되는 해쉬값은 rainbow table에서 확인할 수 없는 값이므로 정상적인 input 값을 구하는 것은 불가능하다. 우리의 목표는 correct 함수를 호출하여 "Congratulation..."을 출력하는 것이므로 auth 함수에서 호출하는 memcpy 함수의 취약점을 이용한 BOF attack을 시도한다. 
+
+Ida pro의 decompile 기능을 이용해 auth 코드를 보면 memcpy 함수에 의해 input의 값이 int형 변수 v3에 복사되는데, input은 12bytes인 반면 v3는 int형 4bytes 이므로 buffer overflow attack이 가능하다. 지역 변수 v3와 ebp 사이의 거리는 8byte이므로 ebp 이상의 영역을 침범하여 sfp가 변조되는 것이다. 따라서 input의 마지막 4byte(&input + 8bytes)를 input의 시작 주소로 만들고(sfp 변조), &input + 4bytes의 값을 correct 함수의 시작 지점으로 만들면 auth 함수가 끝난 후 auth의 sfp를 넘겨받은 main의 ebp는 input의 시작주소가 되고, ebp+4에 위치한 ret은 correct 함수의 시작 주소로 변조된다. 그리고 main 함수가 종료된 후 correct 함수가 호출된다. correct 함수는 input 값에 /xdeadbeef가 있는 것을 확인하고 "Congratulation..."을 출력한다.
+
+payload를 Hex Decode 한 뒤 Base64 Encode를 수행하면 Authkey를 얻을 수 있다.
 
 ![fig1](https://github.com/tjrkddnr/CTF/blob/master/suninatas/level20/fig1.jpg?raw=true)
+
+Little Endian에 따라 payload를 작성한다. 
+
+input 상위 1bytes ~ 4bytes : \xef\xbe\xad\xde
+
+input 상위 5bytes ~ 8bytes - main의 변조된 ret(correct 함수의 시작 주소) : \x5f\x92\x04\x08
+
+input 상위 9bytes ~ 12bytes - auth의 변조된 sfp(전역변수 input의 시작 주소) : \xec\xc9\x11\x08
 
 **payload : \xef\xbe\xad\xde\x5f\x92\x04\x08\xec\xc9\x11\x08**
 
