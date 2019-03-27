@@ -107,9 +107,9 @@ with requests.Session() as s:
 ## level 9 - Reverse Engineering – static analysis
 Olydbg를 이용해 해당 프로그램을 분석한다. 프로그램 내의 string을 조사해보면 “Congratulation”이라는 텍스트를 확인할 수 있다. 해당 위치로 이동해보면 MessageBox에 의해 해당 텍스트가 출력되는 것임을 알 수 있다. MessageBox 함수가 호출되기 전에 어떤 함수를 호출하고(CALL 명령어) 조건에 따라 분기(JNZ명령어)가 실행된다. 우리의 목표는 “Congratulation” 메시지박스를 띄우는 것 이므로 분기조건을 확인하기 위해 CALL 00404608 부분에 BP를 걸어 디버깅을 해보면 이 루틴은 EAX(사용자 입력값)와 EDX(“913465”)의 값을 비교하여 그 값들이 같으면 MessageBox를 띄우는 루틴으로 이동하는 기능을 하는 것임을 알 수 있다.
 
-![fig1]()
+![fig1](https://github.com/tjrkddnr/CTF/blob/master/suninatas/level9/fig1.jpg?raw=true)
 
-![fig2]()
+![fig2](https://github.com/tjrkddnr/CTF/blob/master/suninatas/level9/fig2.jpg?raw=true)
 
 ***Authkey : 913465***
 
@@ -117,7 +117,7 @@ Olydbg를 이용해 해당 프로그램을 분석한다. 프로그램 내의 str
 ## level 10 - Reverse Engineering – static analysis
 Exeinfo PE를 통해 해당 파일 정보를 확인해 보면 .NET으로 작성된 프로그램임을 알 수 있다. Dopeek을 이용해 decompile하면 소스코드 전체를 확인할 수 있다.
 
-![fig1]()
+![fig1](https://github.com/tjrkddnr/CTF/blob/master/suninatas/level10/fig1.jpg?raw=true)
 
 **Key value : 2theT@P**
 
@@ -127,9 +127,9 @@ Exeinfo PE를 통해 해당 파일 정보를 확인해 보면 .NET으로 작성�
 ## level 11 - Reverse Engineering – static analysis
 9번문제와 마찬가지로 문제 내의 string을 조사하고 분기조건 직전에 호출되는 함수 부분에 BP를 걸어 분석한다. EAX(사용자 입력값)와 EDX(“2VB6H1XS0F“)의 값이 같으면 MessageBox를 띄우는 루틴임을 알 수 있다. 2VB6H1XS0F을 입력 값으로 넘겨주면 authkey를 얻을 수 있다.
 
-![fig1]()
+![fig1](https://github.com/tjrkddnr/CTF/blob/master/suninatas/level11/fig1.jpg?raw=true)
 
-![fig2]()
+![fig2](https://github.com/tjrkddnr/CTF/blob/master/suninatas/level11/fig2.jpg?raw=true)
 
 ***Autokey : 2abbe4b681aae92244536ca0e32fa0de***
 
@@ -214,11 +214,11 @@ cv.imshow('title', nimg)
 cv.waitKey(0)
 ```
 
-원본 - ![fig1]()
+원본 - ![fig1](https://github.com/tjrkddnr/CTF/blob/master/suninatas/level17/qrmaster.jpg?raw=true)
 
-전처리 - ![fig2]()
+전처리 - ![fig2](https://github.com/tjrkddnr/CTF/blob/master/suninatas/level17/newimg.jpg?raw=true)
 
-보정 - ![fig3]()
+보정 - ![fig3](https://github.com/tjrkddnr/CTF/blob/master/suninatas/level17/newnewimg.jpg?raw=true)
 
 ***Authkey : YouAreQRCodeMaster~!***
 
@@ -287,7 +287,7 @@ with open('cipher.txt', 'r') as f:
 IDA를 이용해 문제의 파일을 디스어셈블한다. 해당 프로그램은 input을 받아 base64 decoding을 수행하고 그 값이 0xc(12)를 넘지 않으면 auth 함수를 호출한다. auth 함수에서는 input에 대한 md5 해쉬값을 계산하여 그 값이 특정 해쉬값(f87cd601aa7fedca99018a8be88eda34 )과 비교하여 같으면 auth 함수를 호출하는 구조이다. 이때 비교 연산에 사용되는 해쉬값은 rainbow table에서 확인할 수 없는 값이므로 정상적인 input 값을 구하는 것은 불가능하다. 우리의 목표는 단순히 correct 함수를 호출하는 것이므로 auth 함수에서 호출하는 memcpy 함수의 취약점을 이용한 BOF attack을 시도한다. 
 Ida pro의 decompile 기능을 이용해 auth 코드를 보면 memcpy 함수에 의해 input의 int형 변수 v3에 복사하는데, input은 12bytes인 반면 v3는 int형 4bytes 이므로 buffer overflow가 발생한다. 지역 변수 v3와 ebp의 거리는 8이므로 input의 마지막 4bytes로 ebp가 변조되는 것이다. 따라서 input의 마지막 4byte(&input + 8bytpes)를 input의 시작 주소로 두고, &input + 4bytes의 값을 correct 함수의 시작 지점으로 두면 auth 함수가 끝난 후 ebp는 input의 시작주소, ret은 correct 함수의 시작 주소로 변조된다. (ebp는 고정된 값이므로 4bytes 크기인 ebp를 8bytes 크기로 변조시켜 ebp + 4bytes에 위치한 ret 영역까지 변조시킨 것이다.)
 
-![fig1]()
+![fig1](https://github.com/tjrkddnr/CTF/blob/master/suninatas/level20/fig1.jpg?raw=true)
 
 **payload : \xef\xbe\xad\xde\x5f\x92\x04\x08\xec\xc9\x11\x08**
 
@@ -297,11 +297,11 @@ Ida pro의 decompile 기능을 이용해 auth 코드를 보면 memcpy 함수에 
 ## level 21 - Steganography
 문제의 jpg 파일의 크기가 일반적인 jpg파일 크기보다 훨씬 크다. 이 사실로부터 jpg 파일에 또다른 정보가 포함되어 있음을 유추할 수 있다. jpg파일의 SOI는 FF D8이고, EOI는 FF D9이다. WinHex를 이용해 해당 바이트를 검색하면 SOI/EOI가 여러 번 반복됨을 확인할 수 있다. 즉, 이미지 파일 안에 또다른 이미지파일이 들어있는 것이다. SOI와 EOI를 기준으로 파일을 분할하면 숨겨진 이미지들을 추출해낼 수 있다.`
  
-원본 - ![fig1]()
+원본 - ![fig1](https://github.com/tjrkddnr/CTF/blob/master/suninatas/level21/images/1.jpg?raw=true)
 
-숨겨진 파일1 - ![fig1]()
+숨겨진 파일1 - ![fig1](https://github.com/tjrkddnr/CTF/blob/master/suninatas/level21/images/2.jpg?raw=true)
 
-숨겨진 파일 2 - ![fig1]()
+숨겨진 파일 2 - ![fig1](https://github.com/tjrkddnr/CTF/blob/master/suninatas/level21/images/3.jpg?raw=true)
 
 ***Authkey : H4CC3R_IN_TH3_MIDD33_4TT4CK***
 
