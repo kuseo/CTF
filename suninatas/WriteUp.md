@@ -285,7 +285,7 @@ with open('cipher.txt', 'r') as f:
 
 ## level 20 - Buffer overflow attack
 IDA를 이용해 문제의 파일을 디스어셈블한다. 해당 프로그램은 input을 받아 base64 decoding을 수행하고 그 값이 0xc(12)를 넘지 않으면 auth 함수를 호출한다. auth 함수에서는 input에 대한 md5 해쉬값을 계산하여 그 값이 특정 해쉬값(f87cd601aa7fedca99018a8be88eda34 )과 비교하여 같으면 correct 함수를 호출하는 구조이다. 이때 비교 연산에 사용되는 해쉬값은 rainbow table에서 확인할 수 없는 값이므로 정상적인 input 값을 구하는 것은 불가능하다. 우리의 목표는 단순히 correct 함수를 호출하는 것이므로 auth 함수에서 호출하는 memcpy 함수의 취약점을 이용한 BOF attack을 시도한다. 
-Ida pro의 decompile 기능을 이용해 auth 코드를 보면 memcpy 함수에 의해 input의 int형 변수 v3에 복사하는데, input은 12bytes인 반면 v3는 int형 4bytes 이므로 buffer overflow가 발생한다. 지역 변수 v3와 ebp의 거리는 8이므로 input의 마지막 4bytes로 ebp가 변조되는 것이다. 따라서 input의 마지막 4byte(&input + 8bytpes)를 input의 시작 주소로 두고, &input + 4bytes의 값을 correct 함수의 시작 지점으로 두면 auth 함수가 끝난 후 ebp는 input의 시작주소, ret은 correct 함수의 시작 주소로 변조된다. (ebp는 고정된 값이므로 4bytes 크기인 ebp를 8bytes 크기로 변조시켜 ebp + 4bytes에 위치한 ret 영역까지 변조시킨 것이다.)
+Ida pro의 decompile 기능을 이용해 auth 코드를 보면 memcpy 함수에 의해 input의 값이 int형 변수 v3에 복사되는데, input은 12bytes인 반면 v3는 int형 4bytes 이므로 buffer overflow가 발생한다. 지역 변수 v3와 ebp의 거리는 8이므로 input의 마지막 4bytes로 ebp가 변조되는 것이다. 따라서 input의 마지막 4byte(&input + 8bytpes)를 input의 시작 주소로 두고, &input + 4bytes의 값을 correct 함수의 시작 지점으로 두면 auth 함수가 끝난 후 ebp는 input의 시작주소, ret은 correct 함수의 시작 주소로 변조된다. (ebp의 위치는 고정된 값이므로 4bytes 크기인 ebp를 8bytes 크기로 변조시켜 ebp + 4bytes에 위치한 ret 영역까지 변조시킨 것이다.)
 
 ![fig1](https://github.com/tjrkddnr/CTF/blob/master/suninatas/level20/fig1.jpg?raw=true)
 
