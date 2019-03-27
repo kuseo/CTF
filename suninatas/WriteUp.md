@@ -534,7 +534,11 @@ with open('cipher.txt', 'r') as f:
 
         for t in sorted(result3.items(), key = lambda t:t[1], reverse = True):
             f2.write(t[0] + ' : ' + str(t[1]) + '\n')
+```
 
+빈도 분석 결과를 바탕으로 substitution map을 만들어가며 암호를 해독한다.
+
+```python
 def translate(char, table):
     if char in table:
         return table[char]
