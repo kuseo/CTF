@@ -1,7 +1,4 @@
-# Write Up
-
 ## Linux Bash Shell Instruction
->https://en.wikipedia.org/wiki/Standard_streams
 
 linux에서 command로 실행되는 process는 일반적으로 표준 입력 스트림(standard input stream)과 표준 출력 스트림(standard output stream), 그리고 오류 출력 스트림(standard error stream)을 가지고 있다. 모든 스트림은 plain text 형태로 console에 출력된다.
 
@@ -34,6 +31,8 @@ command substitution. \`로 둘러 쌓인 문자열을 console command로 대체
 
 $(str) : str을 실행한다.
 
+>https://en.wikipedia.org/wiki/Standard_streams
+
 ## Exploit payload Instruction
 python c옵션을 이용해 인터프리터를 실행하여 payload를 작성하고 pipe 등을 이용해 프로그램으로 전달한다. python script는 출력 과정에서 EOF를 자동으로 추가하기 때문에 쉘을 invoke 하는 payload의 경우 쉘이 실행된 후 종료되는 것을 방지하기 위해 cat을 넣어주어야 한다.
 
@@ -49,3 +48,5 @@ python c옵션을 이용해 인터프리터를 실행하여 payload를 작성하
 (python -c “print data”; cat) | nc pwnable.kr port_number
 
 (python -c “print dataN”; cat) | … | (python -c “print data2”; cat) | (python -c “print data1”; cat) | nc pwnable.kr port_number
+
+
