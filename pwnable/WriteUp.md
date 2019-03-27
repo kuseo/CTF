@@ -1,6 +1,8 @@
 # Write Up
 
 ## Linux Bash Shell Instruction
+>https://en.wikipedia.org/wiki/Standard_streams
+
 linux에서 command로 실행되는 process는 일반적으로 표준 입력 스트림(standard input stream)과 표준 출력 스트림(standard output stream), 그리고 오류 출력 스트림(standard error stream)을 가지고 있다. 모든 스트림은 plain text 형태로 console에 출력된다.
 
 ### 1.  redirection
