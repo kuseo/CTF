@@ -457,9 +457,13 @@ with requests.Session() as s:
 
 ## level 24 - Android OS
 다운로드 받은 파일을 winHex로 열면 파일 시작 부분에 PK라는 문자가 보인다. 이를 통해 해당 파일이 압축파일 포맷임을 유추해낼 수 있다. 파일 확장자를 .zip로 바꾸고 압축을 해제하면 AndroidManifest.xml, classes.dex 등과 같은 파일이 보인다. 이 파일이 apk파일(안드로이드 앱)이라는 것을 알 수 있다. dex2jar, 7za, jad를 이용한 안드로이드 앱 정적분석 기법을 이용하여 소스코드를 추출한다.
+
 Step1) $ d2j-dex2jar.bat classes.dex
+
 Step2) $ 7za x classes-dex2jar.jar -osuninatas_class
+
 Step3) $ jad -r -sjava -d suninatas_java suninatas_class **/*.class
+
 
 소스코드에서 key value를 확인할 수 있다.
 
