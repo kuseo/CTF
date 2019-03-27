@@ -308,9 +308,11 @@ Ida pro의 decompile 기능을 이용해 auth 코드를 보면 memcpy 함수에 
 
 ## level 22 - Blind SQL injection
 SQL 명령어들이 필터링 되어있어 단순한 SQL injection 공격을 수행할 수 없다. 페이지 소스를 보면 id : guest, pw : guest라는 예시가 주어지고, admin 계정의 password를 알아내야 한다는 것을 알 수 있다. guest/guest로 로그인을 시도하면 OK guest라는 문자가 출력된다. 즉, 입력한 데이터가 올바르면 서버는 OK라는 문자를 포함한 폼을 전송한다는 것을 알 수 있다. Blind SQL injection 공격을 수행한다. 필터링 되지 않는 substring 명령어를 통해 DB의 사용자 정보 테이블에서 pw 속성값을 알아낸다. id 필드에 admin' and substring(pw,1,1)='a'—와 같이 쿼리문이 포함된 데이터를 넘겨주면서 서버의 응답을 확인하는 방식으로 공격을 수행한다
-import requests
+
 
 ```python
+import requests
+
 login_url = 'http://suninatas.com/member/mem_action.asp'
 with requests.Session() as s:
     main_login = {'Hid': '', 'Hpw':..'}
