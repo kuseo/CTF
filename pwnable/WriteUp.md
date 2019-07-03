@@ -22,7 +22,7 @@ read 함수를 통해 buf 변수에 "LETMEWIN\n"이라는 문자열을 입력해
 
 ![fig2](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/collision/fig2.jpg?raw=true)
 
-**payload : ./col $(python -c "print '\x01\x01\x01\x01'*4 + '\xe8\x05\xd9\x1d'")**
+**payload : ./col $(python -c "print '\x01'\*16 + '\xe8\x05\xd9\x1d'")**
 
 ***flag : daddy! I just managed to create a hash collision :)***
 
