@@ -36,11 +36,13 @@ func 함수의 gets 함수에 BOF 취약점이 존재한다.
 gets함수는 ebp - 0x2C 위치에서 함수 호출 인자를 받아온다. 이를 통해 overflowme 변수의 위치가 ebp - 0x2C임을 알 수 있다.
 
 ![fig3](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/bof/fig3.jpg?raw=true)
+<br />
 system("/bin/sh")를 수행하는 위치인 0x664로 RET값을 변조해 보았다. overflowme 변수의 위치부터 48bytes(0x2C + 4bytes(SFP))를 더미 값으로 채우고 그 다음 값으로 0x664를 입력한다.
 
 payload : (python -c "print 'A'*48 + '\x64\x06'") | nc pwnable.kr 9000
-
+<br />
 함수 호출이 종료될 때 stack smash가 감지되어 exploit에 실패하였다.
+
 
 함수 호출이 종료되기 전에 exploit하기 위해서 RET이 아닌 함수 인자 값을 변조하는 공격을 시도한다. overflowme 변수의 위치부터 52bytes(0x2C + 4bytes(SFP) + 4bytes(RET))를 더미 값으로 채우고 함수 인자인 key 값을 0xcafebabe로 변조하여 if 문의 식을 만족시킴으로서 system("/bin/sh")가 실행되도록 한다.
 
