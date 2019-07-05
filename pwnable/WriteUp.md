@@ -40,6 +40,7 @@ gets함수는 ebp - 0x2C 위치에서 함수 호출 인자를 받아온다. 이�
 system("/bin/sh")를 수행하는 위치인 0x664로 RET값을 변조해 보았다. overflowme 변수의 위치부터 48bytes(0x2C + 4bytes(SFP))를 더미 값으로 채우고 그 다음 값으로 0x664를 입력한다.
 
 payload : (python -c "print 'A'*48 + '\x64\x06'") | nc pwnable.kr 9000
+
 함수 호출이 종료될 때 stack smash가 감지되어 exploit에 실패하였다.
 
 <br/>
