@@ -13,7 +13,7 @@ read 함수를 통해 buf 변수에 "LETMEWIN\n"이라는 문자열을 입력해
 **payload : (python -c "print 'LETMEWIN'") | ./fd 4660**
 
 ***flag : mommy! I think I know what a file descriptor is!!***
-<br/>
+<br/><br/>
 
 ## collsion
 ![fig1](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/collision/fig1.jpg?raw=true)
