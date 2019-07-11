@@ -113,6 +113,8 @@ key ^ 0x6B8B4567 == 0xDEADBEEF 를 만족해야 하므로 key == 0xDEADBEEF ^ 0x
 
 
 ![fig4](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/random/figure4.JPG?raw=true)  
+
+
 **payload : (python -c "print '3039230856'") | ./random**
 
 ***flag : Mommy, I thought libc random is unpredictable...***
@@ -121,8 +123,17 @@ key ^ 0x6B8B4567 == 0xDEADBEEF 를 만족해야 하므로 key == 0xDEADBEEF ^ 0x
 
 ## input
 <br/><br/>
+
+
 ## leg
+해당 문제 서버에 접속하는 계정은 gdb, python 등을 사용할 수 없다. 소스 코드 분석을 통해 문제를 해결해야 한다.
+
+
+
+***flag : My daddy has a lot of ARMv5te muscle!***
 <br/><br/>
+
+
 ## mistake
 <br/><br/>
 ## shellshock
