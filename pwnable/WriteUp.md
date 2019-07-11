@@ -10,6 +10,7 @@ read 함수를 통해 buf 변수에 "LETMEWIN\n"이라는 문자열을 입력해
 
 ![fig2](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/fd/fig2.jpg?raw=true)  
 
+
 **payload : (python -c "print 'LETMEWIN'") | ./fd 4660**
 
 ***flag : mommy! I think I know what a file descriptor is!!***
@@ -21,6 +22,7 @@ read 함수를 통해 buf 변수에 "LETMEWIN\n"이라는 문자열을 입력해
 
 
 ![fig2](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/collision/fig2.jpg?raw=true)
+
 
 **payload : ./col $(python -c "print '\x01'\*16 + '\xe8\x05\xd9\x1d'")**
 
@@ -35,12 +37,13 @@ func 함수의 gets 함수에 BOF 취약점이 존재한다.
 ![fig2](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/bof/fig2.jpg?raw=true)  
 gets함수는 ebp - 0x2C 위치에서 함수 호출 인자를 받아온다. 이를 통해 overflowme 변수의 위치가 ebp - 0x2C임을 알 수 있다.
 
-![fig3](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/bof/fig3.jpg?raw=true)  
 
+![fig3](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/bof/fig3.jpg?raw=true)  
 함수 호출이 종료되기 전에 exploit하기 위해서 RET가 아닌 함수 인자 값을 변조하는 공격을 시도한다. overflowme 변수의 위치부터 52bytes(0x2C + 4bytes(SFP) + 4bytes(RET))를 더미 값으로 채우고 함수 인자인 key 값을 0xcafebabe로 변조하여 if 문의 식을 만족시킴으로서 system("/bin/sh")가 실행되도록 한다.
 
 
 ![fig4](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/bof/fig4.jpg?raw=true)
+
 
 **payload : (python -c "print 'A'\*52 + '\xbe\xba\xfe\xca'";cat) | nc pwnable.kr 9000**
 
@@ -48,9 +51,30 @@ gets함수는 ebp - 0x2C 위치에서 함수 호출 인자를 받아온다. 이�
 <br/><br/>
 
 ## flag
+![fig1](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/flag/figure1.JPG?raw=true)  
+문제의 바이너리 파일 flag를 HxD로 분석한다. elf파일 포맷이며, upx로 패킹되어 있음임을 확인하였다.
+
+
+![fig2](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/flag/figure2.JPG?raw=true)  
+Detect It Easy를 이용해 분석하면 더 자세한 정보를 얻을 수 있다.
+
+
+![fig3](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/flag/figure3.JPG?raw=true)  
+upx 언패킹을 시도한다.
+
+
+![fig4](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/flag/figure4.JPG?raw=true)  
+IDA를 이용해 .rodata section에 있는 flag값을 확인한다.
+
+***flag : UPX...? sounds like a delivery service :)***
 <br/><br/>
+
+
 ## passcode
+
 <br/><br/>
+
+
 ## random
 <br/><br/>
 ## input
