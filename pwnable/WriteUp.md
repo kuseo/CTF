@@ -71,7 +71,30 @@ IDA를 이용해 .rodata section에 있는 flag값을 확인한다.
 
 
 ## passcode
+![fig1](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/passcode/figure1.JPG?raw=true)  
+bof 취약점이 존재하는 scanf 함수를 사용하고 있으며, scanf 함수의 인자로 변수의 주소가 아닌 변수 값을 전달하고 있다.
 
+
+![fig2](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/passcode/figure2.JPG?raw=true)
+![fig3](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/passcode/figure3.JPG?raw=true)  
+![fig4](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/passcode/figure4.JPG?raw=true)  
+welcome 함수의 name 변수는 ebp-0x70에 위치하며, login 함수의 passcode1 변수는 ebp-0x10에 위치한다. 한편 ebp-0x70과 ebp-0x10은 십진수로 96만큼 차이가 난다. 따라서 login 함수 내의 변수가 로드되는 시점에 passcode1 변수의 값은 namee 변수의 96byte 이후의 값과 같아진다. 이 점을 이용해 scanf("%d", passcode1)의 실행 결과를 조작할 수 있다.
+
+login 함수의 scanf("%d", passcode1) 실행 이후, fflush 함수와 printf 함수를 차례로 호출한다. 해당 함수들을 대상으로 GOT overwrite 공격을 수행한다.
+
+
+![fig5](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/passcode/figure5.JPG?raw=true)  
+![fig6](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/passcode/figure6.JPG?raw=true)  
+printf 함수의 GOT 주소에는 \x00이 포함되어 있어 payload로 전달할 수 없다. 따라서 fflush 함수의 GOT를 overwrite해야한다.
+
+
+![fig7](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/passcode/figure7.JPG?raw=true)  
+name 변수의 첫 96bytes를 Dummy 값으로 채우고, 마지막 4bytes에 fflush 함수의 GOT 주소를 넣는다. 그리고 scanf의 입력으로 원하는 주소값(login 함수의 if문 내부)을 int 형식으로 입력하여 exploit 한다.
+
+
+**payload : (python -c "print '134514135'") | (python -c "print 'A'*96 + '\x04\xa0\x04\x08'";cat) | ./passcode**
+
+***flag : Sorry mom.. I got confused about scanf usage :(***
 <br/><br/>
 
 
