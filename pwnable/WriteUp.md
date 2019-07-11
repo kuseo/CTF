@@ -92,14 +92,33 @@ printf 함수의 GOT 주소에는 \x00이 포함되어 있어 payload로 전달�
 name 변수의 첫 96bytes를 Dummy 값으로 채우고, 마지막 4bytes에 fflush 함수의 GOT 주소를 넣는다. 그리고 scanf의 입력으로 원하는 주소값(login 함수의 if문 내부)을 int 형식으로 입력하여 exploit 한다.
 
 
-**payload : (python -c "print '134514135'") | (python -c "print 'A'*96 + '\x04\xa0\x04\x08'";cat) | ./passcode**
+**payload : (python -c "print '134514135'") | (python -c "print 'A'\*96 + '\x04\xa0\x04\x08'";cat) | ./passcode**
 
 ***flag : Sorry mom.. I got confused about scanf usage :(***
 <br/><br/>
 
 
 ## random
+![fig1](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/random/figure1.JPG?raw=true)  
+random.c의 소스코드를 보면 random 함수를 이용해 난수를 생성하였으나 seed값을 명시하지 않았다. 따라서 매 실행마다 동일한 값을 생성하게 된다.
+
+
+![fig2](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/random/figure2.JPG?raw=true)  
+GDB를 이용해 key ^ random 연산을 수행하기 직전에 break를 걸고 random 변수에 담긴 값을 확인한다.
+
+
+![fig3](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/random/figure3.JPG?raw=true)  
+random 변수에는 0x6b8b4567이 기록되어있다.  
+key ^ 0x6B8B4567 == 0xDEADBEEF 를 만족해야 하므로 key == 0xDEADBEEF ^ 0x6B8B4567 이다. 0xDEADBEEF ^ 0x6B8B4567의 값은 0xB526FB88(십진수 3039230856) 이다.
+
+
+![fig4](https://github.com/tjrkddnr/CTF/blob/master/pwnable/Toddler's%20Bottle/random/figure4.JPG?raw=true)  
+**payload : (python -c "print '3039230856'") | ./random**
+
+***flag : Mommy, I thought libc random is unpredictable...***
 <br/><br/>
+
+
 ## input
 <br/><br/>
 ## leg
