@@ -15,9 +15,8 @@ $ gdb [file or pid]
 
 ## Install peda
 ```bash
-$ wget http://ropshell.com/peda/peda.tar.gz
-$ tar zxvf peda.tar.gz
-$ ls -l peda
+$ git clone https://github.com/longld/peda.git ~/peda
+$ echo "source ~/peda/peda.py" >> /etc/gdb/gdbinit
 ```
 
 ## Run peda
@@ -29,7 +28,7 @@ $ source /path/to/.../peda.py
 
 혹은 gdbinit을 수정하여 gdb 실행시 자동으로 peda와 연결되도록 할 수 있다.
 ```bash
-$ echo "source /path/to/.../peda.py" >> /etc/gdb/gdbinit
+$ echo "source ~/peda/peda.py" >> sudo /etc/gdb/gdbinit
 ```
 
 ## Further
