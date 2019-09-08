@@ -10,7 +10,7 @@ $ gdb --version
 
 ## Run GDB
 ```bash
-$ gdb [file]
+$ gdb [file or pid]
 ```
 
 ## Install peda
@@ -31,3 +31,6 @@ $ source /path/to/.../peda.py
 ```bash
 $ echo "source /path/to/.../peda.py" >> /etc/gdb/gdbinit
 ```
+
+## Further
+https://github.com/tjrkddnr/CTF/blob/master/pwnable/GDB%20Instruction.md
