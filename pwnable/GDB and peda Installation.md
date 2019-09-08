@@ -21,12 +21,13 @@ $ ls -l peda
 ```
 
 ## Run peda
-GDB에서 아래 명령어 입력 시 peda로 연결됨
+GDB에서 아래 명령어 입력 시 peda로 연결된다.
 ```bash
 $ source /path/to/.../peda.py
 ```
 <br/>
-혹은 .gdbinit을 수정하여 gdb 실행시 자동으로 peda와 연결되도록 할 수 있다.
+
+혹은 gdbinit을 수정하여 gdb 실행시 자동으로 peda와 연결되도록 할 수 있다.
 ```bash
 $ echo "source /path/to/.../peda.py" >> /etc/gdb/gdbinit
-```  
+```
