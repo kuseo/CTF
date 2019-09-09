@@ -16,13 +16,12 @@ $ gdb [file or pid]
 ## Install peda
 ```bash
 $ git clone https://github.com/longld/peda.git ~/peda
-$ echo "source ~/peda/peda.py" >> /etc/gdb/gdbinit
 ```
 
 ## Run peda
 GDB에서 아래 명령어 입력 시 peda로 연결된다.
 ```bash
-$ source /path/to/.../peda.py
+$ source ~/peda/peda.py
 ```
 <br/>
 
