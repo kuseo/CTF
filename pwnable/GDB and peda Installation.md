@@ -27,7 +27,8 @@ $ source ~/peda/peda.py
 
 혹은 gdbinit을 수정하여 gdb 실행시 자동으로 peda와 연결되도록 할 수 있다.
 ```bash
-$ echo "source ~/peda/peda.py" >> sudo /etc/gdb/gdbinit
+$ sudo su
+$ echo "source ~/peda/peda.py" >> /etc/gdb/gdbinit
 ```
 
 ## Further
